@@ -1,0 +1,254 @@
+/*
+  styles.css for Virtual Furniture Placement Project
+
+  I (Ben van Lier) took GPT as partial assistance in the structure and layout of this 
+  CSS file. While GPT helped with suggestions and guidance, this code was written 
+  and adapted manually to fit the needs of this project. 
+
+  Fonts imported from Google Fonts: Playfair Display and Roboto
+  External tools and sources used:
+    - Google Fonts: https://fonts.googleapis.com
+    - GPT-4 for design ideas and code suggestions when no other source could help, also helped with compacting the information I could extract from the Mmdn web docs (source below)
+    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element in general, but especially https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+*/
+
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap");
+
+:root {
+    --bg-color: rgba(255, 255, 255, 0.9);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --modal-bg: rgba(0, 0, 0, 0.4);
+    --button-bg: #aaa;
+    --button-hover-bg: black;
+    --modal-content-bg: #fefefe;
+    --modal-content-border: #888;
+    --modal-content-shadow: rgba(0, 0, 0, 0.1);
+    --text-color: #000;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url("https://hemmingandwills.co.uk/cdn/shop/articles/featured_image_-_living_room_furniture_layout_3467x.jpg?v=1692692232") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+    z-index: -1;
+    background-size: cover;
+    background: inherit;
+}
+
+#title {
+    font-family: "Playfair Display", serif;
+    font-size: 48px;
+    color: var(--text-color);
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#openObjectModal, #openDoorModal {
+    display: none;
+}
+
+.room-created .container {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+.room-created #openObjectModal, .room-created #openDoorModal {
+    display: inline-block;
+}
+
+#openRoomModal {
+    padding: 20px 50px;
+    font-size: 24px;
+    border-radius: 40px;
+}
+
+.room-created #openRoomModal, .room-created #openObjectModal, .room-created #openDoorModal {
+    padding: 20px 50px; 
+    font-size: 24px;
+    border-radius: 40px;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.modal-content button[type="submit"] {
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.modal-content button[type="submit"]:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#3d-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #add8e6;
+}
+
+#cubeButtons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 10px;
+    z-index: 20;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 30;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--modal-content-bg);
+    padding: 20px;
+    border: 1px solid var(--modal-content-border);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--modal-content-shadow);
+    width: 400px;
+    max-width: 90%;
+    box-sizing: border-box;
+}
+
+.close {
+    color: var(--button-bg);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close:focus {
+    color: var(--button-hover-bg);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+input[type="text"], input[type="number"], select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    min-width: 250px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    width: auto;
+    max-width: 400px;
+}
+
+.object-name {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+    input[type="text"], input[type="number"], select {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.object-label {
+    color: white;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 3px;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+}
