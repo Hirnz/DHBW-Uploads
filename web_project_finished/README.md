@@ -1,1 +1,0 @@
-Die Website ist nur durch einen lokalen Server funktional, da die texturen der 3d Modelle sonst von Browser geblockt werden. Die einfachste Lösung ist die VS Code Extension Live Server. Öffne den Projektordner in VS Code mit File>Open Folder>... Navigiere zu dem .html file. Rechtsklick darauf sollte die Option "Open with Live Server" ermöglichen.
